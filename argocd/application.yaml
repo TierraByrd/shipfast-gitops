@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: shipfast-status-api
+  namespace: argocd
+  labels:
+    app.kubernetes.io/name: shipfast-status-api
+    app.kubernetes.io/part-of: shipfast
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/TierraByrd/shipfast-gitops.git
+    targetRevision: main
+    path: manifests
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: shipfast
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
