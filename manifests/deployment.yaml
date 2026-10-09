@@ -10,7 +10,7 @@ metadata:
     app.kubernetes.io/version: "1.0.0"
     app.kubernetes.io/component: api
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       app: shipfast-status-api
